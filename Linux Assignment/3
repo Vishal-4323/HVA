@@ -1,0 +1,12 @@
+sudo adduser nginx
+sudo usermod -aG nginx vishal
+groups vishal
+goups nginx
+whoami
+vi test.txt
+chmod 740 test.txt
+ls -l
+mkdir cp
+cp test.txt cp
+ls -l
+
