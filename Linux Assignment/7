@@ -1,4 +1,0 @@
-grep word filename
-grep word filename | head -n 5
-grep "multiple words" filename
-
