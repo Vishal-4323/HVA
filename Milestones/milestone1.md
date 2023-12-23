@@ -93,8 +93,8 @@ if __name__=="__main__":
     app.run(debug=True,port=8000)
 
 ```
-After, I create an EC2 instance in AWS. And copy my api code using scp command and store it on my EC2 instance.
-Then I create a service and run the api code in my instance.
+After that, I created an EC2 instance in AWS. And copy my api code using scp command and store it on my EC2 instance.
+Then I created a service and run the api code in my instance.
 ```service
 [Unit]
 Description=My API Service
@@ -113,7 +113,21 @@ And I Install the caddy server in my EC2 instance. And do the reverse proxy if t
         reverse_proxy localhost:8000
 }
 ```
-This is the database I connected to my api. Then, I test the api in curl.
+This is the database I connected to my api. Then, I test the API in curl.
 
-First I test the get method in curl
-
+First I tested the GET method in curl
+```bash
+curl -X GET -H 'Content-type: application/json' -d '{"busno" : "70"}' 3.109.209.131/get
+```
+Then I tested the POST method in curl
+```bash
+curl -X POST -H 'Content-type: application/json' -d '{"busno" : "20", "startpoint" : "Sulur", "endpoint" : "Singanallur"}' 3.109.209.131/add
+```
+Then I tested the PUT method in curl
+```bash
+curl -X PUT -H 'Content-type: application/json' -d '{"busno" : "20", "startpoint" : "Sulur", "endpoint" : "Gandhipuram"}' 3.109.209.131/update
+```
+Then I tested the DELETE method in curl
+```bash
+curl -X DELETE -H 'Content-type: application/json' -d '{"busno" : "23"}' 3.109.209.131/delete
+```
