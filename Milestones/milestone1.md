@@ -1,9 +1,9 @@
 ## Deploy a sample 2 tier application on cloud
 I planned to create a simple API. It is really useful for tourist to know about the bus routes and bus details. The bus routes and bus details can be added by the government incharge.
 
-First, I create mysql database in AWS RDS Dashboard and I connected the mysql in my system
+First, I created mysql database in AWS RDS Dashboard and I connected the mysql in my system
 
-```sql
+```bash
 mysql -h awsmysqlendpoint -u username -p
 ```
 Then, I create the api code in flask
@@ -61,8 +61,6 @@ def get():
     try:
         _json = request.json
         _busno = _json['busno']
-        #_start = _json['startpoint']
-        #_end = _json['endpoint']
         sqlQuery = "select * from details where bus_no=%s"
         bindData = (_busno, )
         cursor.execute(sqlQuery, bindData)
@@ -110,8 +108,12 @@ ExecStart=/usr/bin/python3 /home/ubuntu/Project/api.py
 WantedBy=multi-user.target
 ```
 And I Install the caddy server in my EC2 instance. And do the reverse proxy if the request is come from the 80 port it is forward the request to port 8000 in the EC2 instance.
-
+```caddyfile
+:80 {
+        reverse_proxy localhost:8000
+}
+```
 This is the database I connected to my api. Then, I test the api in curl.
-![loading](MilestoneImages/milestone1(ii).jpg)
+
 First I test the get method in curl
-![loading](MilestoneImages/milestone1(i).jpg)
+
