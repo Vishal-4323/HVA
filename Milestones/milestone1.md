@@ -111,4 +111,7 @@ WantedBy=multi-user.target
 ```
 And I Install the caddy server in my EC2 instance. And do the reverse proxy if the request is come from the 80 port it is forward the request to port 8000 in the EC2 instance.
 
-After I test the api in curl.
+This is the database I connected to my api. Then, I test the api in curl.
+![loading](milestone1(ii).jpg)
+First I test the get method in curl
+![loading](milestone1(i).jpg)
