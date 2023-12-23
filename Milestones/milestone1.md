@@ -3,7 +3,7 @@ I planned to create a simple API. It is really useful for tourist to know about 
 
 First, I create mysql database in AWS RDS Dashboard and I connected the mysql in my system
 
-```mysql
+```sql
 mysql -h awsmysqlendpoint -u username -p
 ```
 Then, I create the api code in flask
@@ -52,8 +52,6 @@ def update():
         cursor.execute(sqlQuery, bindData)
         connection.commit()
         response = jsonify({'response':'bus details updated successfully!'})
-        #cursor.close()
-        #connection.close()
         return response
     except Exception as e:
         print(e)
@@ -97,7 +95,8 @@ if __name__=="__main__":
     app.run(debug=True,port=8000)
 
 ```
-Then I create a service and run the api code
+After, I create an EC2 instance in AWS. And copy my api code using scp command and store it on my EC2 instance.
+Then I create a service and run the api code in my instance.
 ```service
 [Unit]
 Description=My API Service
@@ -110,3 +109,6 @@ ExecStart=/usr/bin/python3 /home/ubuntu/Project/api.py
 [Install]
 WantedBy=multi-user.target
 ```
+And I Install the caddy server in my EC2 instance. And do the reverse proxy if the request is come from the 80 port it is forward the request to port 8000 in the EC2 instance.
+
+After I test the api in curl.
