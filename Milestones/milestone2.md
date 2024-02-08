@@ -24,3 +24,7 @@ And I updated the ASG.
 ![loading...](/Milestones/MilestoneImages/milestone2(iv).jpg)
 
 ![loading...](/Milestones/MilestoneImages/milestone2(v).jpg)
+
+After, I created the alarm in CloudWatch. If the CPU utilization is greater than 80% in the ASG instances it send the notification through the SNS Notification.
+
+![loading...](/Milestones/MilestoneImages/milestone2(vi).jpg)
