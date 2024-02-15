@@ -35,5 +35,6 @@ I used describe-instances command and filter and query sub commands for this pro
 ```bash
 aws ec2 describe-instances --filter Name=instance-state-name,Values=stopped --query "Reservations[*].Instances[*].{Instance:InstanceId, InstanceReason:StateTransitionReason}"
 ```
-I used this documentation. 
+![loading...](/AWS%20Assignment/Images/AWSassignment3.jpg)
+I used this documentation to solve this problem. 
 https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
