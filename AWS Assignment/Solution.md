@@ -1,4 +1,5 @@
-### AWS Assignment
+# AWS Assignment
+### IAM
 >1. List users by ARN in your AWS account using a single command <br>Deliverable: Command to use
 
 ```bash
@@ -24,3 +25,15 @@ I will create a IAM user group and add the freelancers in the groups. By using I
 ```
 I used this documentation for learn about IP address condition operator. 
 https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_IPAddress
+<br><br>
+### EC2
+>1. List all of your  instances that are currently stopped and the reason for the stop using a simple one line command<br>
+Deliverable: Command to use
+
+I used describe-instances command and filter and query sub commands for this problem.
+
+```bash
+aws ec2 describe-instances --filter Name=instance-state-name,Values=stopped --query "Reservations[*].Instances[*].{Instance:InstanceId, InstanceReason:StateTransitionReason}"
+```
+I used this documentation. 
+https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
