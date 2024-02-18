@@ -44,7 +44,10 @@ https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
 
 First, I created an Instance. After I installed the apache tomcat and ran the server on a particular port by using this documentation. https://medium.com/@madhavarajas1997/installing-apache-tomcat-on-ubuntu-22-04-08c8eda52312
 
+![loading...](/AWS%20Assignment/Images/AWSassignment4.jpg)
+
 Then, I created the automation python code. By using the filters we can get the instance details and create image for that instance.
+
 ```python
 import boto3
 
@@ -66,6 +69,8 @@ try:
 except Exception as e:
     print(e)
 ```
-I ran this code it's automatically created the AMI. 
+I ran this code it's created the AMI for that instance.
+
+![loading...](/AWS%20Assignment/Images/AWSassignment4(i).jpg)
 
 Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-creation-for-ec2-and-copy-to-other-region-or-disaster-recovery
