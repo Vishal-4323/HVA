@@ -38,3 +38,34 @@ aws ec2 describe-instances --filter Name=instance-state-name,Values=stopped --qu
 ![loading...](/AWS%20Assignment/Images/AWSassignment3.jpg)
 I used this documentation to solve this problem. 
 https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
+<br><br>
+>2.Create an AMI which upon launch will have tomcat installed and running on a particular port. Automate the AMI creation process 
+<br>Deliverable: AMI and Automation Script
+
+First, I created an Instance. After I installed the apache tomcat and ran the server on a particular port by using this documentation. https://medium.com/@madhavarajas1997/installing-apache-tomcat-on-ubuntu-22-04-08c8eda52312
+
+Then, I created the automation python code. By using the filters we can get the instance details and create image for that instance.
+```python
+import boto3
+
+try:
+    ec2 = boto3.resource('ec2', region_name='ap-south-1')
+    image_ids = []
+    instances = ec2.instances.filter(
+        Filters=[
+            {
+                'Name': 'instance-state-name', 'Values': ['running']
+            }
+        ]
+    )
+    for instance in instances:
+        print(instance.id)
+        image = instance.create_image(Name='AMI Copy For '+instance.id)
+        print(image)
+
+except Exception as e:
+    print(e)
+```
+I ran this code it's automatically created the AMI. 
+
+Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-creation-for-ec2-and-copy-to-other-region-or-disaster-recovery
