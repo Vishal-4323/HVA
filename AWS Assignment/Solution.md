@@ -74,3 +74,44 @@ I ran this code it's created the AMI for that instance.
 ![loading...](/AWS%20Assignment/Images/AWSassignment4(i).jpg)
 
 Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-creation-for-ec2-and-copy-to-other-region-or-disaster-recovery
+<br><br>
+
+>3.Launch two instances (with EBS volumes) one of which will upload a file to s3 and the other downloads the same file. Note: follow least privilege principle
+<br>Deliverable :- Required Steps and Scripts
+
+**Steps**
+- First, I created a S3 object in my instance.
+- Then, I created a json policy to upload a file in S3.
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": ["arn:aws:s3:::test/*"]
+    }
+  ]
+}
+```
+- And created a IAM role and attached this policy.
+- Then, I attached this role to the instance by Modify IAM role.
+- Again I created a json policy to download the same file in S3.
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": ["arn:aws:s3:::test/*"]
+    }
+  ]
+}
+```
+- And created another IAM role and attached to this policy.
+- Then, attached the IAM role to the instance by Modify IAM role.
