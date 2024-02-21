@@ -123,3 +123,4 @@ Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-c
 ```bash
 aws s3 cp myDir s3://mybucket/ --recursive
 ```
+![loading...](/AWS%20Assignment/Images/AWSassignment7.jpg)
