@@ -115,3 +115,11 @@ Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-c
 ```
 - And created another IAM role and attached to this policy.
 - Then, attached the IAM role to the instance by Modify IAM role.
+<br><br>
+### S3
+>1.Recursively copy a directory and its subfolders from your PC to Amazon S3 using a single command
+<br>Deliverable: Command to use
+
+```bash
+aws s3 cp myDir s3://mybucket/ --recursive
+```
