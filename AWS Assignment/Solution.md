@@ -124,3 +124,43 @@ Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-c
 aws s3 cp myDir s3://mybucket/ --recursive
 ```
 ![loading...](/AWS%20Assignment/Images/AWSassignment7.jpg)
+<br><br>
+>2.Create bucket MyBucket and folder MySecretFolder. Write a bucket policy which allows all users to retrieve any object in MyBucket except those in the MySecretFolder. It also grants put and delete permission to the root user of AWS account.
+<br>Deliverable: Bucket policy
+
+This question I solved by trial and error method each time I faced error when creating the policy I solved and understood the error by AWS Documentation.
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::123456789044:user/Test"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::my-bucket-102/*"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::123456789044:root"
+            },
+            "Action": [
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": "arn:aws:s3:::my-bucket-102/MySecretFolder/*"
+        },
+        {
+            "Effect": "Deny",
+            "Principal": {
+                "AWS": "arn:aws:iam::123456789044:user/Test"
+            },
+            "Action": "*",
+            "Resource": "arn:aws:s3:::my-bucket-102/MySecretFolder/*"
+        }
+    ]
+}
+```
