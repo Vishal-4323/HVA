@@ -166,3 +166,33 @@ This question I solved by trial and error method each time I faced error when cr
 ```
 
 ![loading...](/AWS%20Assignment/Images/AWSassignment8.jpg)
+<br><br>
+
+>3. Write a python script that will list down all the files and folders in s3 and send this list to your mail id.
+<br>Deliverable: Python script
+
+I get the files and folders list from the bucket. Then stored that in a message and send that through the SNS notification.
+
+```python
+import boto3
+
+s3 = boto3.resource('s3')
+mybucket = s3.Bucket('my-bucket-104')
+
+mysns = boto3.client('sns')
+message = "Your S3 bucket files and folders list \n"
+
+for mybucket_obj in mybucket.objects.all():
+    message=message+mybucket_obj.key+'\n'
+
+mysns.publish(
+    TopicArn = "arn:aws:sns:ap-south-1:123456789044:MyTopic",
+    Message = message,
+    Subject = "Your S3 Bucket Report"
+)
+```
+
+![loading...](/AWS%20Assignment/Images/AWSassignment9.jpg)
+
+I used this article for send SNS notification.
+https://medium.com/@vishvratnashegaonkar27/sending-notifications-with-aws-sns-using-python-and-boto3-4c48bb51710
