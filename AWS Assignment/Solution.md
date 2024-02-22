@@ -39,7 +39,7 @@ aws ec2 describe-instances --filter Name=instance-state-name,Values=stopped --qu
 I used this documentation to solve this problem. 
 https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
 <br><br>
->2.Create an AMI which upon launch will have tomcat installed and running on a particular port. Automate the AMI creation process 
+>2. Create an AMI which upon launch will have tomcat installed and running on a particular port. Automate the AMI creation process 
 <br>Deliverable: AMI and Automation Script
 
 First, I created an Instance. After I installed the apache tomcat and ran the server on a particular port by using this documentation. https://medium.com/@madhavarajas1997/installing-apache-tomcat-on-ubuntu-22-04-08c8eda52312
@@ -76,7 +76,7 @@ I ran this code it's created the AMI for that instance.
 Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-creation-for-ec2-and-copy-to-other-region-or-disaster-recovery
 <br><br>
 
->3.Launch two instances (with EBS volumes) one of which will upload a file to s3 and the other downloads the same file. Note: follow least privilege principle
+>3. Launch two instances (with EBS volumes) one of which will upload a file to s3 and the other downloads the same file. Note: follow least privilege principle
 <br>Deliverable :- Required Steps and Scripts
 
 **Steps**
@@ -117,7 +117,7 @@ Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-c
 - Then, attached the IAM role to the instance by Modify IAM role.
 <br><br>
 ### S3
->1.Recursively copy a directory and its subfolders from your PC to Amazon S3 using a single command
+>1. Recursively copy a directory and its subfolders from your PC to Amazon S3 using a single command
 <br>Deliverable: Command to use
 
 ```bash
@@ -125,7 +125,7 @@ aws s3 cp myDir s3://mybucket/ --recursive
 ```
 ![loading...](/AWS%20Assignment/Images/AWSassignment7.jpg)
 <br><br>
->2.Create bucket MyBucket and folder MySecretFolder. Write a bucket policy which allows all users to retrieve any object in MyBucket except those in the MySecretFolder. It also grants put and delete permission to the root user of AWS account.
+>2. Create bucket MyBucket and folder MySecretFolder. Write a bucket policy which allows all users to retrieve any object in MyBucket except those in the MySecretFolder. It also grants put and delete permission to the root user of AWS account.
 <br>Deliverable: Bucket policy
 
 This question I solved by trial and error method each time I faced error when creating the policy I solved and understood the error by AWS Documentation.
