@@ -116,6 +116,20 @@ Here, I used this documentation https://dheeraj3choudhary.com/automate-aws-ami-c
 - And created another IAM role and attached to this policy.
 - Then, attached the IAM role to the instance by Modify IAM role.
 <br><br>
+
+>4. Automate the process of setting up passwordless between two AWS EC2 instances.
+<br>Deliverable :- Steps for setting up passwordless SSH
+
+**Steps**
+- First, I created two instances in the aws server1 and server2.
+- Then, I logged into the server1.
+- And created a ssh key using "ssh-keygen" command.
+- After, I copied the public key and logged into the server2.
+- Then, I pasted into the following folder "/.ssh/authorized_keys"
+- After I ssh to ther server2 by following command "ssh -i ~/.ssh/id_rsa private_ip_of_other_server2".
+- By the same way I created the ssh key and sent to the server1 from server2. A
+- After I accessed the server1 from the server2.
+
 ### S3
 >1. Recursively copy a directory and its subfolders from your PC to Amazon S3 using a single command
 <br>Deliverable: Command to use
