@@ -196,3 +196,36 @@ mysns.publish(
 
 I used this article for send SNS notification.
 https://medium.com/@vishvratnashegaonkar27/sending-notifications-with-aws-sns-using-python-and-boto3-4c48bb51710
+<br><br>
+
+>4. You have an application which stores all the generated logs at a particular location. These logs are analyzed on a monthly basis by your Data Analyst team and generate reports. Once analyzed these files will be of no use to the Data Analyst team but your manager asks you to store these logs for at least 1 year from the time of creation just for backup. Design an appropriate strategy.
+<br>Deliverable: Description of strategy and implementation either through CLI or Python
+
+**Strategy**
+
+
+>5. Assuming you have a versioning enabled S3 bucket and multiple versions of the same object, Write a python script which takes the bucket name and object path as parameters and downloads the 2nd latest version of this object i.e the one prior to the latest version.
+<br>Deliverable: Python script
+
+```python
+import boto3
+
+client = boto3.client('s3')
+response = client.list_object_versions(Bucket='mybucket15455', Prefix='welcome.txt')
+
+li = []
+for i in response.get('Versions'):
+    li.append(i.get('LastModified'))
+
+li.sort()
+s = li[len(li)-2]
+
+versionid = ""
+for i in response.get('Versions'):
+    if s==i.get('LastModified'):
+        versionid = i.get('VersionId')
+
+res = client.get_object(Bucket='mybucket15455', Key='welcome.txt', VersionId=versionid)
+```
+
+This is the script I used for get my object in the versioning enabled bucket.
