@@ -202,7 +202,46 @@ https://medium.com/@vishvratnashegaonkar27/sending-notifications-with-aws-sns-us
 <br>Deliverable: Description of strategy and implementation either through CLI or Python
 
 **Strategy**
-
+- First, I created a json file.
+- That json file automatically transition the objects to the Standard Infrequent-Access storage classes after 30 days.
+- And delete the object after 365 days.
+   
+```json
+{
+    "Rules": [
+        {
+            "Expiration": {
+                "Days": 365
+            },
+            "ID": "MjA1ZmQ3ZDYtMDJmNS00ZjNlLWE1MWUtOTY5MTg1N2RhMDE0",
+            "Filter": {
+                "Prefix": "SubFolder/"
+            },
+            "Status": "Enabled",
+            "Transitions": [
+                {
+                    "Days": 30,
+                    "StorageClass": "STANDARD_IA"
+                }
+            ],
+        },
+        {
+            "Expiration": {
+                "ExpiredObjectDeleteMarker": true
+            },
+            "ID": "DeleteMarkers",
+            "Filter": {
+                "Prefix": "SubFolder/"
+            },
+            "Status": "Enabled"
+        }
+    ]
+}
+```
+- Using the following command I set the lifecycle configuration for the s3 bucket.
+```cmd
+aws s3api put-bucket-lifecycle-configuration --bucket mybucket154 --lifecycle-configuration file://lifecycle.json
+```
 
 >5. Assuming you have a versioning enabled S3 bucket and multiple versions of the same object, Write a python script which takes the bucket name and object path as parameters and downloads the 2nd latest version of this object i.e the one prior to the latest version.
 <br>Deliverable: Python script
