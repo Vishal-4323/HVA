@@ -3,5 +3,5 @@ variable "cidr_block" {
 }
 
 variable "assign_generated_ipv6_cidr_block" {
-  default = true
+  default = false
 }

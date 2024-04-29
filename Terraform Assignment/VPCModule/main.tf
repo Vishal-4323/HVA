@@ -5,14 +5,14 @@ provider "aws" {
 module "aws_vpc" {
   source = "./modules/aws_vpc"
   cidr_block = var.cidr_block
-  assign_generated_ipv6_cidr_block = var.assign_generated_ipv6_cidr_block
+  assign_generated_ipv6_cidr_block = var.ip_addr=="ipv6" ? true : false
 }
 
 module "aws_subnet" {
   source = "./modules/aws_subnet"
   vpc_id = module.aws_vpc.vpc_id
   cidr_block = var.cidr_block
-  ipv6_cidr_block = module.aws_vpc.vpc_ipv6_cidr_block
+  //ipv6_cidr_block = module.aws_vpc.vpc_ipv6_cidr_block
 }
 
 module "aws_internet_gateway" {
