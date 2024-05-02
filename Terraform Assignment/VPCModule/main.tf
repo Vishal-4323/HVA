@@ -22,11 +22,6 @@ module "aws_internet_gateway" {
   vpc_id = module.aws_vpc.vpc_id
 }
 
-/*module "aws_internet_gateway_attachment" {
-  source = "./modules/aws_internet_gateway_attachment"
-  vpc_id = module.aws_vpc.vpc_id
-  internet_gateway_id = module.aws_internet_gateway.internet_gateway_id
-}*/
 
 module "aws_route_table" {
   source = "./modules/aws_route_table"
@@ -49,3 +44,9 @@ module "aws_main_route_table_association" {
   route_table_id = module.aws_route_table.route_table_id
   vpc_id = module.aws_vpc.vpc_id
 }
+
+/*module "aws_internet_gateway_attachment" {
+  source = "./modules/aws_internet_gateway_attachment"
+  vpc_id = module.aws_vpc.vpc_id
+  internet_gateway_id = module.aws_internet_gateway.internet_gateway_id
+}*/
