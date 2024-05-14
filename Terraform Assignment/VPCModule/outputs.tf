@@ -13,3 +13,11 @@ output "internet_gateway_id" {
 output "route_table_id" {
   value = module.aws_route_table.route_table_id
 }
+
+output "id" {
+  value = module.aws_subnet[0].id
+}
+
+/*output "nat_gateway_id" {
+  value = module.aws_nat_gateway.nat_gateway_id
+}*/

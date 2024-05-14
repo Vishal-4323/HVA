@@ -3,13 +3,17 @@ variable "route_table_id" {
 }
 
 variable "destination_cidr_block" {
-  default = ""
+  
 }
 
 variable "gateway_id" {
-  default = ""
+  //default = ""
 }
 
 variable "destination_ipv6_cidr_block" {
-  default = ""
+  
+}
+
+variable "nat_gateway_id" {
+  
 }

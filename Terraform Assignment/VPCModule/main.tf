@@ -12,9 +12,16 @@ module "aws_subnet" {
   source = "./modules/aws_subnet"
   vpc_id = module.aws_vpc.vpc_id
   count = 2
-  cidr_block = var.ip_addr=="ipv4" ? cidrsubnet(var.cidr_block, 4, count.index) : null
+  cidr_block = cidrsubnet(var.cidr_block, 4, count.index)
   ipv6_cidr_block = var.ip_addr=="ipv6" ?cidrsubnet(module.aws_vpc.vpc_ipv6_cidr_block, 4, count.index) : null
   //ipv6_cidr_block = var.ip_addr=="ipv6" ? module.aws_vpc.vpc_ipv6_cidr_block : false
+}
+
+module "aws_nat_gateway" {
+  count = var.ip_public_or_private ? 0 : 1
+  source = "./modules/aws_nat_gateway"
+  subnet_id = tolist(module.aws_subnet)[0].id
+  //subnet_id = module.aws_subnet[0].subnet_id
 }
 
 module "aws_internet_gateway" {
@@ -34,9 +41,8 @@ module "aws_route" {
   route_table_id = module.aws_route_table.route_table_id
   destination_cidr_block = "0.0.0.0/16"
   destination_ipv6_cidr_block = "::/56"
-  //destination_cidr_block = var.ip_addr=="ipv4" ? "0.0.0.0/16" : null
-  //destination_ipv6_cidr_block = var.ip_addr=="ipv6" ? "::/56" : null
-  gateway_id = module.aws_internet_gateway.internet_gateway_id
+  nat_gateway_id = var.ip_public_or_private ? null : module.aws_nat_gateway[0].nat_gateway_id
+  gateway_id = var.ip_public_or_private ? module.aws_internet_gateway.internet_gateway_id : null
 }
 
 module "aws_main_route_table_association" {

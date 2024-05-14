@@ -7,6 +7,12 @@ variable "region_name" {
 }
 
 variable "ip_addr" {
-  default = "ipv4"
-  description = "choose ipv4 or ipv6"
+  type = string
+  //default = "ipv6"
+  description = "type ipv4 or ipv6"
+}
+
+variable "ip_public_or_private" {
+  type = bool
+  description = "If you select public ip give true else give false in the value"
 }
