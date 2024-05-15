@@ -1,5 +1,6 @@
 variable "cidr_block" {
   //default = "10.0.0.0/16"
+  description = "type your ipv4 address"
 }
 
 variable "region_name" {
