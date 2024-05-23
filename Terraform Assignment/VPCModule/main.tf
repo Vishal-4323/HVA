@@ -39,8 +39,8 @@ module "aws_route_table" {
 module "aws_route" {
   source = "./modules/aws_route"
   route_table_id = module.aws_route_table.route_table_id
-  destination_cidr_block = "0.0.0.0/16"
-  destination_ipv6_cidr_block = "::/56"
+  destination_cidr_block = var.ip_addr=="ipv4" ? "0.0.0.0/16" : null
+  destination_ipv6_cidr_block = var.ip_addr=="ipv6" ? "::/56" : null
   nat_gateway_id = var.ip_public_or_private ? null : module.aws_nat_gateway[0].nat_gateway_id
   gateway_id = var.ip_public_or_private ? module.aws_internet_gateway.internet_gateway_id : null
 }
