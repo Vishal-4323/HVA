@@ -51,6 +51,19 @@ module "aws_main_route_table_association" {
   vpc_id = module.aws_vpc.vpc_id
 }
 
+module "aws_launch_template" {
+  source = "./modules/aws_launch_template"
+  instance_type = "t2.micro"
+}
+
+module "aws_autoscaling_group" {
+  source = "./modules/aws_autoscaling_group"
+  min_size = 1
+  max_size = 4
+  desired_capacity = 1
+  id = module.aws_launch_template.lt_id
+}
+
 /*module "aws_internet_gateway_attachment" {
   source = "./modules/aws_internet_gateway_attachment"
   vpc_id = module.aws_vpc.vpc_id

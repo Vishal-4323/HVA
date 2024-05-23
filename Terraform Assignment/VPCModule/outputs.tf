@@ -18,6 +18,10 @@ output "id" {
   value = module.aws_subnet[0].id
 }
 
+output "lt_id" {
+  value = module.aws_launch_template.lt_id
+}
+
 /*output "nat_gateway_id" {
   value = module.aws_nat_gateway.nat_gateway_id
 }*/
