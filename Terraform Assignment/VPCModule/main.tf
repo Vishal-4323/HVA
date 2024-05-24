@@ -14,7 +14,8 @@ module "aws_subnet" {
   count = 2
   cidr_block = cidrsubnet(var.cidr_block, 4, count.index)
   ipv6_cidr_block = var.ip_addr=="ipv6" ?cidrsubnet(module.aws_vpc.vpc_ipv6_cidr_block, 4, count.index) : null
-  //ipv6_cidr_block = var.ip_addr=="ipv6" ? module.aws_vpc.vpc_ipv6_cidr_block : false
+  availability_zone = "${var.region_name}${count.index%2==0 ? "a" : "b"}"
+  //ipv6_cidr_block = var.ip_addr=="ipv6" ? module.aws_vpc.vpc_ipv6_cidr_block : false 
 }
 
 module "aws_nat_gateway" {
@@ -62,6 +63,13 @@ module "aws_autoscaling_group" {
   max_size = 4
   desired_capacity = 1
   id = module.aws_launch_template.lt_id
+}
+
+module "aws_lb" {
+  source = "./modules/aws_lb"
+  internal = false
+  load_balancer_type = "application"
+  subnets = [for subnet in module.aws_subnet : subnet.id]
 }
 
 /*module "aws_internet_gateway_attachment" {

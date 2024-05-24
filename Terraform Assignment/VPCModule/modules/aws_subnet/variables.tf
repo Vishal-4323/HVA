@@ -9,3 +9,7 @@ variable "ipv6_cidr_block" {
 variable "cidr_block" {
   default = ""
 }
+
+variable "availability_zone" {
+  default = ""
+}
