@@ -10,7 +10,7 @@ variable "desired_capacity" {
   default = 1
 }
 
-variable "availability_zones" {
+variable "vpc_zone_identifier" {
   default = []
 }
 
