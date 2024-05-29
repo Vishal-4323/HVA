@@ -17,3 +17,7 @@ variable "vpc_zone_identifier" {
 variable "id" {
   default = ""
 }
+
+variable "target_group_arns" {
+  default = []
+}

@@ -16,9 +16,18 @@ module "aws_launch_template" {
   instance_type = "t2.micro"
 }
 
+module "aws_lb_target_group" {
+  source = "./modules/aws_lb_target_group"
+  name = "lb-tg"
+  port = 80
+  protocol = "HTTP"
+  vpc_id = "vpc-0e79b79a54cff993e"
+}
+
 module "aws_autoscaling_group" {
   source = "./modules/aws_autoscaling_group"
   id = module.aws_launch_template.lt_id
+  target_group_arns = [module.aws_lb_target_group.target_group_arn]
   vpc_zone_identifier = var.vpc_zone_identifier
   max_size = 5
   min_size = 1

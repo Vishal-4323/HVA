@@ -9,3 +9,7 @@ output "lt_id" {
 output "asg-name" {
   value = module.aws_autoscaling_group.asg-name
 }
+
+output "target_group_arn" {
+  value = module.aws_lb_target_group.target_group_arn
+}
