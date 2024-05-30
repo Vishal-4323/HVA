@@ -33,7 +33,7 @@ module "aws_lb" {
   name = "my-lb-tf"
   internal = false
   load_balancer_type = "application"
-  subnets = var.vpc_zone_identifier
+  subnets = ["subnet-0f2f3305816f5b70f", "subnet-0d10dfc5d5a560af0"]
   security_groups = ["sg-094f163bdf56467fd"]
 }
 
@@ -61,12 +61,12 @@ module "aws_autoscaling_group" {
   desired_capacity = 1
 }
 
-module "aws_autoscaling_attachment" {
-  source = "./modules/aws_autoscaling_attachment"
-  depends_on = [ 
-    module.aws_autoscaling_group,
-    module.aws_lb
-   ]
-  autoscaling_group_name = module.aws_autoscaling_group.asg-name
-  elb = module.aws_lb.lb_name
-}
+# module "aws_autoscaling_attachment" {
+#   source = "./modules/aws_autoscaling_attachment"
+#   depends_on = [ 
+#     module.aws_autoscaling_group,
+#     module.aws_lb
+#    ]
+#   autoscaling_group_name = module.aws_autoscaling_group.asg-name
+#   elb = module.aws_lb.lb_name
+# }
