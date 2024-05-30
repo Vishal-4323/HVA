@@ -13,3 +13,7 @@ variable "protocol" {
 variable "vpc_id" {
   default = ""
 }
+
+variable "path" {
+  default = "/"
+}
