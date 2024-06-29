@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    environment {
+        AWS_DEFAULT_REGION='ap-south-1'
+    }
+    stages {
+       stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Vishal-4323/Jenkins']])
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform action') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh 'terraform ${action} --auto-approve'
+                }
+            }
+        }
+    }
+}
