@@ -8,6 +8,8 @@
 - Furthormore, used the following documentation to create the Infrastructure Deployment pipeline.
 - [https://spacelift.io/blog/terraform-jenkins](https://spacelift.io/blog/terraform-jenkins)
 
+![loading...](/Milestones/MilestoneImages/tfjenkins.png)
+
 - After, I tried to do CD for AMI.
 - But, the EC2 instance in private subnet and I can't able to use the user data in the EC2 instance created by the AMI.
 - So, I didn't use the aws modify instances command. Then, I planned to create an EC2 instance in public subnet by using the AMI of the private subnet EC2 instance.
@@ -17,3 +19,5 @@
 - If we change anything in the code it will create a new instance with the changes.
 - Furthermore, I created a pipeline for CD for AMI. It used the API code repository and create the EC2 instance with user data. 
 - And we can use the EC2 instance id in the Infrastructure Deployment pipeline.
+
+![loading...](/Milestones/MilestoneImages/instanceJenkins.png)
