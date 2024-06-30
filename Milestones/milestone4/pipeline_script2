@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    environment {
+        AWS_DEFAULT_REGION='ap-south-1'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Vishal-4323/CD-for-AMI']])
+            }
+        }
+        stage('Instance Creation') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh 'aws ec2 run-instances --image-id ${imageid} --count 1 --instance-type t2.micro --key-name project --subnet-id subnet-0f2f3305816f5b70f --security-group-ids sg-094f163bdf56467fd --user-data file://myscript.txt'
+                }
+            }
+        }
+    }
+}
